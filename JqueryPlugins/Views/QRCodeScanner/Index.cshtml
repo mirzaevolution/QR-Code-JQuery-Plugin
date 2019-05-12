@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "Callback";
+}
+<style>
+    .blockcode {
+        background-color: #111;
+        padding: 5px;
+        border-radius: 3px;
+    }
+
+        .blockcode pre code {
+            color: lime
+        }
+</style>
+<br /><br />
+<h2><span class="fa fa-qrcode"></span> QR Code Scanner</h2>
+<p class="text-primary">Created by: Mirza Ghulam Rasyid</p>
+<br />
+<div>
+    <h4 class="text-primary">Default Options</h4>
+    <div class="blockcode">
+        <pre>
+        <code>
+ $.fn.QRScanner.default = {
+    callback: undefined,
+    autoClose: false,
+    modalHeaderColor: "#fff",
+    modalContentColor: "#111"
+ };
+            </code>
+        </pre>
+    </div>
+</div>
+<br />
+<div>
+    <h4>Sample #1</h4>
+    <div class="blockcode">
+        <pre>
+        <code>
+ //#QRContainer is empty div
+ $("#QRContainer").QRScanner({
+     /* required */
+     callback: function (content) { 
+        alert("QR Content: " + content);
+     },
+     /* optional */
+     autoClose: false,
+     /* optional */
+     modalHeaderColor: "white",
+     /* optional */
+     modalContentColor: "#110"
+ });
+            </code>
+        </pre>
+    </div>
+    <br />
+    <button id="ButtonScan1" type="button" class="btn btn-dark">Scan</button>
+</div>
+
+<br />
+<div>
+    <h4>Sample #2</h4>
+    <div class="blockcode">
+        <pre>
+        <code>
+ //#QRContainer is empty div
+ $("#QRContainer").QRScanner({
+     /* required */
+     callback: function (content) { 
+        alert("QR Content: " + content);
+     },
+     /* optional */
+     autoClose: true,
+     /* optional */
+     modalHeaderColor: "white",
+     /* optional */
+     modalContentColor: "#110"
+ });
+            </code>
+        </pre>
+    </div>
+    <br />
+    <button id="ButtonScan2" type="button" class="btn btn-dark">Scan</button>
+</div>
+<br />
+<div>
+    <h4>Sample #3</h4>
+    <div class="blockcode">
+        <pre>
+        <code>
+ //#QRContainer is empty div
+ $("#QRContainer").QRScanner({
+     /* required */
+     callback: function (content) { 
+        $("#QRContent").val(content);
+     },
+     /* optional */
+     autoClose: true,
+     /* optional */
+     modalHeaderColor: "white",
+     /* optional */
+     modalContentColor: "#110"
+ });
+            </code>
+        </pre>
+    </div>
+    <br />
+    <div class="form-group">
+        
+        <div class="input-group">
+            <input type="text" id="QRContent" placeholder="QR Code Content" class="form-control" style="z-index:0" />
+
+            <div class="input-group-append">
+                <button class="btn btn-primary z-index" type="button" id="ButtonScan3" style="z-index:0">
+                    <i class="fa fa-qrcode" style="font-size:20px"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="QRContainer">
+
+</div>
+@section scripts{
+
+    <script src="~/Scripts/JsQRCode/JS/grid.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/version.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/detector.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/formatinf.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/errorlevel.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/bitmat.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/datablock.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/bmparser.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/datamask.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/rsdecoder.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/gf256poly.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/gf256.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/decoder.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/qrcode.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/findpat.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/alignpat.js"></script>
+    <script src="~/Scripts/JsQRCode/JS/databr.js"></script>
+    <script src="~/Scripts/JsQRCode/Plugin/QrScanner.js"></script>
+    <script src="~/Scripts/App/QRCodeScanner/index.js"></script>
+
+}
+

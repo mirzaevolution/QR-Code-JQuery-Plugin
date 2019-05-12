@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<br />
+<h4>1. Greenify Plugin</h4>
+<div id="box1">
+
+</div>
+<h4>2. Hash</h4>
+<p><strong>Message:</strong> Hello World</p>
+<p><strong>MD5:</strong> <span id="md5msg"></span></p>
+<p><strong>SHA1:</strong> <span id="sha1msg"></span></p>
+<p><strong>SHA256:</strong> <span id="sha256msg"></span></p>
+<p><strong>SHA512:</strong> <span id="sha512msg"></span></p>
+<p><strong>MD5:</strong> <input class="form-control" id="md5msgInput" /></p>
+<p><strong>SHA1:</strong> <input class="form-control" id="sha1msgInput" /></p>
+<p><strong>SHA256:</strong> <input class="form-control" id="sha256msgInput" /></p>
+<p><strong>SHA512:</strong> <input class="form-control" id="sha512msgInput" /></p>
+
+
+<div id="block1">
+    Hello World
+    <p>
+        Hehehe Olla World!
+        <span>Hi Span!</span>
+    </p>
+    <input class="form-control" type="text" value="Hehe World" />
+</div>
+<br />
+<button class="btn btn-danger" id="btnEncrypt">Encrypt</button>
+<button class="btn btn-success" id="btnDecrypt">Decrypt</button>
+@section scripts{
+    <script src="~/Scripts/CryptoJS/rollups/aes.js"></script>
+    <script src="~/Scripts/CryptoJS/rollups/md5.js"></script>
+    <script src="~/Scripts/CryptoJS/rollups/sha1.js"></script>
+    <script src="~/Scripts/CryptoJS/rollups/sha256.js"></script>
+    <script src="~/Scripts/CryptoJS/rollups/sha512.js"></script>
+    <script src="~/Scripts/Plugins/greenify.js"></script>
+    <script src="~/Scripts/Plugins/encrypt.js"></script>
+    <script src="~/Scripts/Plugins/hash.js"></script>
+    <script src="~/Scripts/App/Home/Index.js"></script>
+}
