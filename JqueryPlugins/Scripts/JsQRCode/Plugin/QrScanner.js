@@ -25,7 +25,9 @@
     var v = null;
     
     var RealtimeScanner = {
+        
         StandardScanner: {
+            CurrentId: undefined,
             InitScanner: function (callback) {
              
                 if (RealtimeScanner.StandardScanner.IsCanvasSupported() && window.File && window.FileReader) {
@@ -64,11 +66,11 @@
                             qrcode.decode();
                         }
                         catch (e) {
-                            setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
+                            RealtimeScanner.StandardScanner.CurrentId = setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
                         }
                     }
                     catch (e) {
-                        setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
+                        RealtimeScanner.StandardScanner.CurrentId=  setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
                     }
                 }
             },
@@ -118,7 +120,7 @@
             },
             SetWebcam: function (options) {
                 if (stype == 1) {
-                    setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
+                    RealtimeScanner.StandardScanner.CurrentId =setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
                     return;
                 }
                 var n = navigator;
@@ -162,15 +164,14 @@
 
                 }
                 stype = 1;
-                setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
+                RealtimeScanner.StandardScanner.CurrentId =setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
 
             },
-            
             OnSuccess: function (stream) {
                 v.srcObject = stream;
                 v.play();
                 gUM = true;
-                setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
+                RealtimeScanner.StandardScanner.CurrentId =setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
 
             },
             OnError: function (error) {
@@ -190,6 +191,20 @@
             $(this).append(modalHtml);
             $("#ModalScanHeader").css("background-color", usedOptions.modalHeaderColor);
             $("#ModalScanContent").css("background-color", usedOptions.modalContentColor);
+            $('#ModalScan').on('hidden.bs.modal', function () {
+                setTimeout(function () {
+                    clearTimeout(RealtimeScanner.StandardScanner.CurrentId);
+                    if (v && v.srcObject) {
+                        try {
+
+                            v.srcObject.getTracks()[0].stop();
+                            v.pause();
+                        } catch (err) {
+                            console.log(err);
+                        }
+                    }
+                }, 100);
+            });
         }
         if ($("#qr-canvas").length === 0) {
             $(this).append(canvasHtml);
@@ -213,7 +228,7 @@
             if (autoClose) {
                 $("#ModalScan").modal("hide");
             } else {
-                setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
+                RealtimeScanner.StandardScanner.CurrentId = setTimeout(RealtimeScanner.StandardScanner.CaptureToCanvas, 500);
             }
         };
     }
